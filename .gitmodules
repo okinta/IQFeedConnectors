@@ -1,0 +1,3 @@
+[submodule "IQFeed.CSharpApiClient"]
+	path = IQFeed.CSharpApiClient
+	url = git@github.com:summatix/IQFeed.CSharpApiClient.git
