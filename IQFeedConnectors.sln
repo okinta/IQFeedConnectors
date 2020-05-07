@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30021.99
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQFeedConnectors", "IQFeedConnectors.csproj", "{AF0FBC35-15E0-44B3-BDF2-2A35BB3C9352}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQFeed.CSharpApiClient", "IQFeed.CSharpApiClient\src\IQFeed.CSharpApiClient\IQFeed.CSharpApiClient.csproj", "{10ECE63C-E881-4978-A297-D2E0FD69DB66}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{AF0FBC35-15E0-44B3-BDF2-2A35BB3C9352}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF0FBC35-15E0-44B3-BDF2-2A35BB3C9352}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF0FBC35-15E0-44B3-BDF2-2A35BB3C9352}.Release|Any CPU.Build.0 = Release|Any CPU
-		{10ECE63C-E881-4978-A297-D2E0FD69DB66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{10ECE63C-E881-4978-A297-D2E0FD69DB66}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{10ECE63C-E881-4978-A297-D2E0FD69DB66}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{10ECE63C-E881-4978-A297-D2E0FD69DB66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

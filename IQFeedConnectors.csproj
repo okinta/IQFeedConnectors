@@ -24,11 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IQFeed.CSharpApiClient" Version="2.1.0-preview" />
     <PackageReference Include="Nito.AsyncEx" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="IQFeed.CSharpApiClient\src\IQFeed.CSharpApiClient\IQFeed.CSharpApiClient.csproj" />
   </ItemGroup>
 
 </Project>
