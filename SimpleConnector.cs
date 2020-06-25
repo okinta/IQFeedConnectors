@@ -1,6 +1,5 @@
 ﻿using IQFeed.CSharpApiClient.Streaming.Derivative;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 using System;
 
@@ -11,7 +10,7 @@ namespace IQFeedConnectors
     /// </summary>
     public class SimpleConnector : BaseConnector
     {
-        private DerivativeClient<double> client;
+        private DerivativeClient client;
         private IReadOnlyCollection<string> Symbols { get; set; }
 
         /// <summary>
@@ -21,8 +20,7 @@ namespace IQFeedConnectors
         /// <param name="port">The IQFeed port to connect to.</param>
         public override async Task Connect(string host, int port)
         {
-            var ip = IPAddress.Parse(host);
-            client = DerivativeClientFactory.CreateNew(ip, port);
+            client = DerivativeClientFactory.CreateNew(host, port);
 
             await client.ConnectAsync();
         }

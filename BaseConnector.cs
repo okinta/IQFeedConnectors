@@ -16,7 +16,7 @@ namespace IQFeedConnectors
         /// <summary>
         /// Triggered when a bar is received by IQFeed.
         /// </summary>
-        public event Action<IntervalBarMessage<double>> BarReceived;
+        public event Action<IntervalBarMessage> BarReceived;
 
         private const DerivativeIntervalType intervalType = DerivativeIntervalType.S;
         private const int interval = 60;
@@ -97,7 +97,7 @@ namespace IQFeedConnectors
         /// Call to trigger the BarReceived event.
         /// </summary>
         /// <param name="bar">The new bar to send to BarReceived.</param>
-        protected virtual void OnIntervalBar(IntervalBarMessage<double> bar)
+        protected virtual void OnIntervalBar(IntervalBarMessage bar)
         {
             BarReceived.SafeTrigger(bar);
         }

@@ -14,7 +14,7 @@ namespace IQFeedConnectors
         /// <summary>
         /// Triggered when a bar is received by IQFeed.
         /// </summary>
-        public event Action<IntervalBarMessage<double>> BarReceived;
+        public event Action<IntervalBarMessage> BarReceived;
 
         /// <summary>
         /// Connects to IQFeed.
