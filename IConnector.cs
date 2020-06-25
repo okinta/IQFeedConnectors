@@ -2,6 +2,7 @@
 using IQFeed.CSharpApiClient.Streaming.Derivative;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Threading;
 using System;
 
 namespace IQFeedConnectors
@@ -21,7 +22,8 @@ namespace IQFeedConnectors
         /// </summary>
         /// <param name="host">The IQFeed host to connect to.</param>
         /// <param name="port">The IQFeed port to connect to.</param>
-        public Task Connect(string host, int port);
+        /// <param name="token">The token to check for a cancelation request.</param>
+        public Task Connect(string host, int port, CancellationToken token = default);
 
         /// <summary>
         /// Disconnects from IQFeed.

@@ -1,6 +1,11 @@
-﻿using IQFeed.CSharpApiClient.Streaming.Derivative;
+﻿using DnsClient.Protocol;
+using DnsClient;
+using IQFeed.CSharpApiClient.Streaming.Derivative;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using System.Threading;
 using System;
 
 namespace IQFeedConnectors
@@ -18,9 +23,23 @@ namespace IQFeedConnectors
         /// </summary>
         /// <param name="host">The IQFeed host to connect to.</param>
         /// <param name="port">The IQFeed port to connect to.</param>
-        public override async Task Connect(string host, int port)
+        public override async Task Connect(
+            string host, int port, CancellationToken token = default)
         {
-            client = DerivativeClientFactory.CreateNew(host, port);
+            IPEndPoint ipEndPoint;
+            try
+            {
+                ipEndPoint = new IPEndPoint(IPAddress.Parse(host), port);
+            }
+
+            // If we are given a domain, perform a DNS lookup to find the host
+            catch (FormatException)
+            {
+                var ip = await GetIpAddress(host, token);
+                ipEndPoint = new IPEndPoint(ip, port);
+            }
+
+            client = DerivativeClientFactory.CreateNew(ipEndPoint.Address.ToString(), port);
 
             await client.ConnectAsync();
         }
@@ -60,6 +79,28 @@ namespace IQFeedConnectors
 
             await Symbols.AsyncForEach(async symbol => await client.ReqBarWatchAsync(
                 symbol, interval, beginDate: start, intervalType: intervalType));
+        }
+
+        /// <summary>
+        /// Performs a DNS query to resolve the given host to an IPAddress.
+        /// </summary>
+        /// <param name="host">The host to resolve.</param>
+        /// <param name="token">The token to check for cancellation requests.</param>
+        /// <returns>The resolved IPAddress of the <paramref name="host"/>.</returns>
+        private static async Task<IPAddress> GetIpAddress(
+            string host, CancellationToken token)
+        {
+            var lookupClient = new LookupClient();
+            var result = await lookupClient.QueryAsync(
+                new DnsQuestion(host, QueryType.A), token);
+
+            // Pick a random record
+            var record = result.AllRecords
+                .OfType<AddressRecord>()
+                .OrderBy(x => Guid.NewGuid())
+                .First();
+
+            return record.Address;
         }
     }
 }
